@@ -47,4 +47,21 @@ fun main() {
         println(l)
         l++
     }
+
+    //FOR (There is no traditional loop in Kotlin)
+    val nums = arrayOf(1, 5, 10, 15, 20)
+    for (x in nums) {
+        println(x)
+    }
+
+    //FOR --->> RANGES
+    for (chars in 'a'..'x' ){
+        println(chars)
+    }
+
+    for (nums in 5..20) {
+        if (nums % 2 == 0){
+            println(nums)
+        }
+    }
 }
