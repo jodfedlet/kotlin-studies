@@ -22,4 +22,20 @@ fun main(){
 
     val greeting2 = if (time > 18) "Good day!" else "Good Evening"
     println(greeting2)
+
+
+    //WHEN --> similar to SWITCH in JAVA
+    val day: Int = 5
+
+    val res = when(day) {
+        1 -> "Monday"
+        2 -> "Tuesday"
+        3 -> "Wednesday"
+        4 -> "Thursday"
+        5 -> "Friday"
+        6 -> "saturday"
+        7 -> "Sunday"
+        else -> "Invalid day"
+    }
+    println(res)
 }
