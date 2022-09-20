@@ -20,6 +20,7 @@ class SecurityConfiguration: WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST,"/api/auth/token").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/users").permitAll()
             .anyRequest().authenticated()
 
         http.addFilter(JWTAuthorizingFilter(authenticationManager(), jwtUtils))
