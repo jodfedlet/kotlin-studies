@@ -2,6 +2,7 @@ package jodfedlet.me.kotlinstudies.basicapi.filters
 
 import jodfedlet.me.kotlinstudies.basicapi.AUTHORIZATION
 import jodfedlet.me.kotlinstudies.basicapi.BEARER
+import jodfedlet.me.kotlinstudies.basicapi.implementations.UserDetailImplementation
 import jodfedlet.me.kotlinstudies.basicapi.models.User
 import jodfedlet.me.kotlinstudies.basicapi.utils.JWTUtils
 import org.springframework.security.authentication.AuthenticationManager
@@ -13,7 +14,7 @@ import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class JWTAuthorizingFilter(authenticationManager: AuthenticationManager, val jwtUtils: JWTUtils)
+class JWTAuthorizingFilter(authenticationManager: AuthenticationManager, private val jwtUtils: JWTUtils)
     : BasicAuthenticationFilter(authenticationManager) {
 
 
@@ -34,8 +35,9 @@ class JWTAuthorizingFilter(authenticationManager: AuthenticationManager, val jwt
             val idString = jwtUtils.getUserId(token)
 
             if (!idString.isNullOrEmpty() && idString.isNotBlank()) {
-                val user = User(idString.toLong(), "User test","email@example.com", "admin")
-                return UsernamePasswordAuthenticationToken(user, null)
+                val user = User(idString.toLong(), "User test","admin@admin.com", "admin")
+                val userImplem = UserDetailImplementation(user)
+                return UsernamePasswordAuthenticationToken(user, null, userImplem.authorities)
             }
         }
         throw UsernameNotFoundException("Invalid token")
