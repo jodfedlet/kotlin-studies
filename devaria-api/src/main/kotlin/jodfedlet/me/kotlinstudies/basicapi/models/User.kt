@@ -1,4 +1,4 @@
-package jodfedlet.me.kotlinstudies.basicapi.implementations.models
+package jodfedlet.me.kotlinstudies.basicapi.models
 
 import javax.persistence.*
 

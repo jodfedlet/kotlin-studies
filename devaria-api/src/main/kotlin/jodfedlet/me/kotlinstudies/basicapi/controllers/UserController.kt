@@ -4,7 +4,7 @@ import jodfedlet.me.kotlinstudies.basicapi.dtos.ErrorsDTO
 import jodfedlet.me.kotlinstudies.basicapi.dtos.SuccessDTO
 import jodfedlet.me.kotlinstudies.basicapi.extensions.md5
 import jodfedlet.me.kotlinstudies.basicapi.extensions.toHex
-import jodfedlet.me.kotlinstudies.basicapi.implementations.models.User
+import jodfedlet.me.kotlinstudies.basicapi.models.User
 import jodfedlet.me.kotlinstudies.basicapi.repositories.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
