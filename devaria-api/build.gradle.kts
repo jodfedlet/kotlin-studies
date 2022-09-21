@@ -28,6 +28,7 @@ dependencies {
 	implementation("io.springfox:springfox-swagger2:2.7.0")
 	implementation("io.springfox:springfox-swagger-ui:2.7.0")
 	runtimeOnly("org.postgresql:postgresql")
+	//runtimeOnly("mysql:mysql-connector-java:8.0.30")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 }
