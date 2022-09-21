@@ -1,6 +1,6 @@
 package jodfedlet.me.kotlinstudies.basicapi.implementations
 
-import jodfedlet.me.kotlinstudies.basicapi.models.User
+import jodfedlet.me.kotlinstudies.basicapi.implementations.models.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails as UserDetails1
 

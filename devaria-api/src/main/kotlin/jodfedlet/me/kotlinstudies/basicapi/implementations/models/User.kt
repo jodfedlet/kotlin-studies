@@ -1,4 +1,4 @@
-package jodfedlet.me.kotlinstudies.basicapi.models
+package jodfedlet.me.kotlinstudies.basicapi.implementations.models
 
 import javax.persistence.*
 
@@ -9,5 +9,6 @@ class User(
     val id: Long = 0,
     val name: String = "",
     val email: String = "",
-    val password: String = ""
+    var password: String = "",
+    var role: String = "manager"
     )

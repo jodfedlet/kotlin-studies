@@ -2,7 +2,9 @@ package jodfedlet.me.kotlinstudies.basicapi.controllers
 
 import jodfedlet.me.kotlinstudies.basicapi.dtos.ErrorsDTO
 import jodfedlet.me.kotlinstudies.basicapi.dtos.SuccessDTO
-import jodfedlet.me.kotlinstudies.basicapi.models.User
+import jodfedlet.me.kotlinstudies.basicapi.extensions.md5
+import jodfedlet.me.kotlinstudies.basicapi.extensions.toHex
+import jodfedlet.me.kotlinstudies.basicapi.implementations.models.User
 import jodfedlet.me.kotlinstudies.basicapi.repositories.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -17,7 +19,16 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(val usersRepository: UserRepository) {
 
     @GetMapping
-    fun findAll() = User(1, "User Test", "admin@admin.com","")
+    fun findAll(): ResponseEntity<Any> {
+        return try {
+            ResponseEntity(usersRepository.findAll(), HttpStatus.OK)
+        }catch (e: Exception){
+            ResponseEntity(
+                ErrorsDTO(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Failed to retrieve users, try later"), HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
 
     @PostMapping
     fun create(@RequestBody userDto: User): ResponseEntity<Any> {
@@ -40,13 +51,20 @@ class UserController(val usersRepository: UserRepository) {
                 errors.add("Invalid user password")
             }
 
+
+            if (usersRepository.findByEmail(userDto.email) != null){
+                errors.add("User already exists, please retry later")
+            }
+
             if (errors.size > 0){
                 return ResponseEntity(ErrorsDTO(HttpStatus.BAD_REQUEST.value(), errors = errors), HttpStatus.BAD_REQUEST)
             }
 
+            userDto.password = md5(userDto.password).toHex()
+
             usersRepository.save(userDto)
 
-            ResponseEntity(SuccessDTO("User created successfully"), HttpStatus.OK)
+            ResponseEntity(SuccessDTO("User created successfully"), HttpStatus.CREATED)
         }catch (e: Exception){
             ResponseEntity(
                 ErrorsDTO(

@@ -3,7 +3,7 @@ package jodfedlet.me.kotlinstudies.basicapi.filters
 import jodfedlet.me.kotlinstudies.basicapi.AUTHORIZATION
 import jodfedlet.me.kotlinstudies.basicapi.BEARER
 import jodfedlet.me.kotlinstudies.basicapi.implementations.UserDetailImplementation
-import jodfedlet.me.kotlinstudies.basicapi.models.User
+import jodfedlet.me.kotlinstudies.basicapi.implementations.models.User
 import jodfedlet.me.kotlinstudies.basicapi.utils.JWTUtils
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
